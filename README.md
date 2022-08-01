@@ -1,9 +1,11 @@
-# Fish phenotyping project
-Video recording and image analysis of fishes to automate and increase the efficiency of fish phenotyping, and bolster posterior analysis to improve farm production and management.
+# DETECT FISH ONLY
+Additional Repository to get fish dimensions and weight without fish tag.
+
+<b>Main Repository</b> - [https://github.com/fishguardians/fishing-on-a-conveyor-belt](https://github.com/fishguardians/fishing-on-a-conveyor-belt)
 
 ## Getting Started
-Git clone this repository or download the whole zip package from [Github](https://github.com/fishguardians/fishing-on-a-conveyor-belt.git)
-```git clone https://github.com/fishguardians/fishing-on-a-conveyor-belt.git```
+Git clone this repository or download the whole zip package from [Github](https://github.com/fishguardians/fishing-on-a-conveyor-belt-no-tag.git)
+```git clone https://github.com/fishguardians/fishing-on-a-conveyor-belt-no-tag.git```
 
 ### Prerequisites
 Install Python v@3.10 using this [Windows_x64](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe), [Windows_x32](https://www.python.org/ftp/python/3.10.0/python-3.10.0.exe), [macOS](https://www.python.org/ftp/python/3.10.0/python-3.10.0post2-macos11.pkg) or navigate to [Downloads](https://www.python.org/downloads/release/python-3100/) 
