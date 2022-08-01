@@ -29,9 +29,6 @@ def write_data_output(video_name):
         f = open('output/' + video_name + '/dimensions.txt', 'r')
         dimensions_array = f.readlines()
         f.close()
-        f = open('output/' + video_name + '/ids.txt', 'r')
-        ids_array = f.readlines()
-        f.close()
         f = open('output/' + video_name + '/weights.txt', 'r')
         weights_array = f.readlines()
         f.close()
@@ -66,26 +63,6 @@ def write_data_output(video_name):
             print('Error: Hypothenuse not recorded')
             errwriter.writerow(['Serious', 'Error with Recording Fish Center', 'Missing Output Data',
                                 'Please check /output/' + video_name + ' folder for images.txt file'])
-            return False
-
-    for (index, lines) in enumerate(ids_array):
-        try:
-            if index == 0:
-                continue
-            else:
-                line = lines.split(',')
-                if line == ['\n']:
-                    continue
-
-                for items in overall_data:
-                    if line[1] in items.keys():
-                        items[line[1]]['id'].append(line[3].strip())
-                    else:
-                        continue
-        except:
-            print('Error: Ids not recorded')
-            errwriter.writerow(['Serious', 'Error with Recording ID Tags', 'Missing Output Data',
-                                'Please check /output/' + video_name + ' folder for ids.txt file'])
             return False
     
     for (index, lines) in enumerate(weights_array):
@@ -149,12 +126,6 @@ def write_data_output(video_name):
                     indexofhypot = objects.index(hypot)
                 if k == 'frame':
                     frame = video_name+'/'+objects[indexofhypot]+'.jpg'
-                if k == 'id':
-                    objects = list(filter(None, objects))
-                    if objects:
-                        # sorting on basis of frequency of elements, mode
-                        result = [item for items, c in Counter(objects).most_common() for item in [items] * c]
-                        idtag = result[0]
                 if k == 'weight':
                     # get median of occurrences
                     objects = list(map(lambda x: x.replace('N.A', '0.0'), objects))
@@ -169,7 +140,7 @@ def write_data_output(video_name):
                     results = sorted(objects, key=lambda x: float(x))
                     depth = results[math.floor(len(results) / 2)]
         # add the calculated value into the data
-        write_data.append([fish, idtag, frame, weight, length, depth])
+        write_data.append([fish, frame, weight, length, depth])
     # add iqr of the results
     write_data = check_iqr_data(write_data)
 
@@ -177,7 +148,7 @@ def write_data_output(video_name):
     with open('results/' + video_name[:-4] + '.csv', 'w') as csvfile:
 
         writer = csv.writer(csvfile)
-        writer.writerow(['fish', 'idtag', 'location', 'weight(kg)', 'length(cm)', 'depth(cm)','weight diff(iqr)', 'length diff(iqr)', 'depth diff(iqr)'])
+        writer.writerow(['fish', 'location', 'weight(kg)', 'length(cm)', 'depth(cm)','weight diff(iqr)', 'length diff(iqr)', 'depth diff(iqr)'])
         writer.writerows(write_data)
 
     return write_data
@@ -191,9 +162,9 @@ def check_iqr_data(array):
     for fish in array:
         if fish[1] not in ids:
             ids.append(fish[1])
-            weights.append(float(fish[3]))
-            lengths.append(float(fish[4]))
-            depths.append(float(fish[5]))
+            weights.append(float(fish[2]))
+            lengths.append(float(fish[3]))
+            depths.append(float(fish[4]))
     
     # get interquartile range (IQR)
     iqr_weight_q1 = np.percentile(weights, 25)
@@ -207,20 +178,20 @@ def check_iqr_data(array):
         weight_iqr_error = " "
         length_iqr_error = " "
         depth_iqr_error = " "
-        if float(fish[3]) < iqr_weight_q1:
-            weight_iqr_error = str(round(float(fish[3]) - iqr_weight_q1,3))
-        if float(fish[3]) > iqr_weight_q3:
-            weight_iqr_error =  "+" + str(round(float(fish[3]) - iqr_weight_q3,3))
+        if float(fish[2]) < iqr_weight_q1:
+            weight_iqr_error = str(round(float(fish[2]) - iqr_weight_q1,3))
+        if float(fish[2]) > iqr_weight_q3:
+            weight_iqr_error =  "+" + str(round(float(fish[2]) - iqr_weight_q3,3))
 
-        if float(fish[4]) < iqr_length_q1:
-            length_iqr_error =  str(round(float(fish[4]) - iqr_length_q1,3))
-        if float(fish[4]) > iqr_length_q3:
-            length_iqr_error =  "+" + str(round(float(fish[4]) - iqr_length_q3,3))
+        if float(fish[3]) < iqr_length_q1:
+            length_iqr_error =  str(round(float(fish[3]) - iqr_length_q1,3))
+        if float(fish[3]) > iqr_length_q3:
+            length_iqr_error =  "+" + str(round(float(fish[3]) - iqr_length_q3,3))
         
-        if float(fish[5]) < iqr_depth_q1:
-            depth_iqr_error =  str(round(float(fish[5]) - iqr_depth_q1,3))
-        if float(fish[5]) > iqr_depth_q3:
-            depth_iqr_error =  "+" + str(round(float(fish[5]) - iqr_depth_q3,3))
+        if float(fish[4]) < iqr_depth_q1:
+            depth_iqr_error =  str(round(float(fish[4]) - iqr_depth_q1,3))
+        if float(fish[4]) > iqr_depth_q3:
+            depth_iqr_error =  "+" + str(round(float(fish[4]) - iqr_depth_q3,3))
         fish.append(weight_iqr_error)
         fish.append(length_iqr_error)
         fish.append(depth_iqr_error)

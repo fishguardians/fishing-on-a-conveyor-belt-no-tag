@@ -16,7 +16,7 @@ import streamlit as st
 import time
 from datetime import datetime
 
-from scripts.text_recognition import text_recognition
+# from scripts.text_recognition import text_recognition
 
 if (os.name == 'nt'):
     pytesseract.pytesseract.tesseract_cmd = "./Tesseract-OCR/tesseract.exe"  # Path of where pytesseract.exe is located
@@ -116,11 +116,6 @@ def CaptureImagesOnVideo(videos_to_be_processed, od, user_ocr_whitelist):
         with open('output/' + _video_name + '/dimensions.txt', 'w', encoding='UTF8') as f:
             writer = csv.writer(f)
             # write the header for dimension
-            writer.writerow(['#', 'Fish#', 'Frame', 'Length', 'Depth', 'Flag'])
-        with open('output/' + _video_name + '/ids.txt', 'w', encoding='UTF8') as f:
-            writer = csv.writer(f)
-            # write the header for id
-            writer.writerow(['#', 'Fish#', 'Frame', 'Value'])
         with open('output/' + _video_name + '/weights.txt', 'w', encoding='UTF8') as f:
             writer = csv.writer(f)
             # write the header for weight
@@ -193,39 +188,8 @@ def CaptureImagesOnVideo(videos_to_be_processed, od, user_ocr_whitelist):
             for (index, box) in enumerate(boxes):
                 x, y, w, h = box
 
-                # check if 2 objects are in the image [id tag, fish]
-                if class_ids[index] == 1:  # Detected that id tag is found
-                    id_coords = box
-                    _id_id += 1
-
-                    # Work with a copy of the smaller version of image
-                    id_image = frame.copy()
-                    # Give some padding to ensure values are read properly
-                    if y - 10 < 0 or y + h + 10 > height or x - 10 < 0 or x + w + 10 > width:
-                        id_image = id_image[y:y + h, x:x + w]
-                    else:
-                        id_image = id_image[y - 10:y + h + 10, x - 10:x + w + 10]
-
-                    # Save for reference checking
-                    SaveImages(id_image, _frame_index, _video_name, 'id')
-
-                    # Call the id tag scripts
-                    words = text_recognition(id_image, user_ocr_whitelist)
-                    # words = google_ocr('./images/'+_video_name + '/id/' + str(_frame_index) + '.jpg')
-
-                    if len(words) < 6 or len(words) > 6:
-                        errwriter.writerow(['Warning', 'ID Tag Not Found', 'Request User Validation', 'Please check '
-                                                                                                      'frame ' +
-                                            str(_frame_index) + '.jpg in /images/' + _video_name + '/id/'])
-
-                    # open the file to write
-                    with open('output/' + _video_name + '/ids.txt', 'a', encoding='UTF8') as f:
-                        # create the csv writer
-                        writer = csv.writer(f)
-                        # ['#', 'Fish#', 'Frame', 'Value']
-                        writer.writerow([_id_id, wells_id, _frame_index, words])
-
-                elif class_ids[index] == 0:  # Detected the barramundi fish
+                # check if 1 objects are in the image [fish]
+                if class_ids[index] == 0:  # Detected the barramundi fish
                     fish_coords = box
                     # center point of the fish
                     cx = int((x + x + w) / 2)
