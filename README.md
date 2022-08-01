@@ -112,7 +112,6 @@ Troubleshooting document [doc_link]()
 | 7 | fish_measurement.py | Calls upon image enchancers to scrubbing data from image |
 | 8 | generate_csv.py | Perform data cleaning, using median, mode and IQR |
 | 9 | streamlit_scripts.py | Cache unprocessed videos |
-| 10 | text_recognition.py | Use pytesseract to detect fish id tags |
 | 11 | constants.py | Stores the variables used throughout the project |
 
 <hr/>
