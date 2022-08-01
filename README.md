@@ -1,4 +1,4 @@
-# DETECT FISH ONLY
+# This is a side repository
 Additional Repository to get fish dimensions and weight without fish tag.
 
 <b>Main Repository</b> - [https://github.com/fishguardians/fishing-on-a-conveyor-belt](https://github.com/fishguardians/fishing-on-a-conveyor-belt)
