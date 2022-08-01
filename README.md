@@ -8,7 +8,15 @@ Git clone this repository ```git clone https://github.com/fishguardians/fishing-
 
 <b>or</b>
 
-download the whole zip package from [Github](https://github.com/fishguardians/fishing-on-a-conveyor-belt-no-tag.git)
+download the whole zip package
+
+Installation Guide - [Google Doc](https://docs.google.com/document/d/1_yUt0hXwI_UgTHmy3qmm1XcQa9co_GvDtFCRAo-FJU0/edit?usp=sharing)
+
+Setting Up Tutorial (Windows) - [https://youtu.be/WGdvI_PCXuM](https://youtu.be/WGdvI_PCXuM)
+
+Setting Up Tutorial (Mac) - [https://youtu.be/09KSx-147fg](https://youtu.be/ckRSTjBzwvw)
+
+How To Use Tutorial - [https://youtu.be/MYsK0XLZWLQ](https://youtu.be/MYsK0XLZWLQ)
 
 ### Prerequisites
 Install Python v@3.10 using this [Windows_x64](https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe), [Windows_x32](https://www.python.org/ftp/python/3.10.0/python-3.10.0.exe), [macOS](https://www.python.org/ftp/python/3.10.0/python-3.10.0post2-macos11.pkg) or navigate to [Downloads](https://www.python.org/downloads/release/python-3100/) 
