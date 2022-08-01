@@ -6,9 +6,7 @@ Additional Repository to get fish dimensions and weight without fish tag.
 ## Getting Started
 Git clone this repository ```git clone https://github.com/fishguardians/fishing-on-a-conveyor-belt-no-tag.git```
 
-<b>or</b>
-
-download the whole zip package
+<b>or download the whole zip package </b>
 
 Installation Guide - [Google Doc](https://docs.google.com/document/d/1_yUt0hXwI_UgTHmy3qmm1XcQa9co_GvDtFCRAo-FJU0/edit?usp=sharing)
 
